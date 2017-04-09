@@ -1,12 +1,42 @@
 <template>
   <main class="layout-home-page">
     <h1 class="md-title">Are you ready to be a <span class="md-rebtel">Rebel</span>?</h1>
+    <h2 class="md-subtitle-info">Get to know more about your world!</h2>
+    <section class="layout-country-info">
+      <div class="col s12">
+        <h3 class="md-country-name">{{ country.name }}</h3>
+      </div>
+      <div class="col s12 m6">
+        <h4 class="md-country-name md-native-name">{{ country.nativeName }}</h4>
+        <img class="md-country-flag" :src="country.flag" :alt="country.name">
+      </div>
+      <div class="col s12 m6">
+        <h5 class="md-info-label">Capital</h5>
+        <p class="md-country-text">{{ country.capital }}</p>
+        <h5 class="md-info-label">Calling Codes</h5>
+        <p class="md-country-text" v-for="codes in country.callingCodes">{{ codes }}</p>
+        <h5 class="md-info-label">Region</h5>
+        <p class="md-country-text">{{ country.region }}</p>
+        <h5 class="md-info-label">Currencies</h5>
+        <div class="layout-country-currencies" v-for="currency in country.currencies">
+          <p class="md-country-text">Code: {{ currency.code }}</p>
+          <p class="md-country-text">Name: {{ currency.name }}</p>
+          <p class="md-country-text">Symbol: {{ currency.symbol }}</p>
+        </div>
+      </div>
+    </section>
   </main>
 </template>
 
 <script>
   export default {
-    name: 'Home'
+    name: 'Home',
+    props: ['country'],
+    mounted: function () {
+      setInterval(() => {
+        console.log(this.country)
+      }, 1000)
+    }
   }
 </script>
 
@@ -18,20 +48,48 @@
     background-color: $secondary-color;
   }
 
-  .layout-home-page {
-
-  }
-
   .md-title {
-    color: $primary-color
+    color: $primary-color;
+    line-height: 2;
   }
 
   .md-rebtel {
     background-color: $primary-color;
     color: $secondary-color;
-    padding: 5px 15px;
+    padding: 0 15px;
     display: inline-block;
     animation: rebtelAnim 1s 3s forwards ease;
+  }
+
+  .layout-country-info {
+    margin-top: 60px;
+    padding: 30px 0;
+    border-top: 2px solid $primary-color;
+
+    .md-country-name {
+      color: #1e1e1e;
+    }
+
+    .md-native-name {
+      font-size: 20px;
+    }
+
+    .md-country-text {
+      font-size: 16px;
+      color: #565656;
+      margin: 5px 0 30px;
+    }
+
+    .md-country-flag {
+      width: 290px;
+      display: block;
+      margin: 30px 0;
+    }
+
+    .layout-country-currencies {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 
   @keyframes rebtelAnim {

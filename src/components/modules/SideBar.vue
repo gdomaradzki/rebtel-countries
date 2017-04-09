@@ -2,9 +2,11 @@
   <aside class="layout-app-sidebar">
     <app-logo></app-logo>
     <h3 class="md-subtitle">select a country</h3>
-    <select ref="selectCountry" name="select-country" required class="md-select-country">
+    <select ref="selectCountry" name="select-country" required class="md-select-country" v-model="_country">
+      <option hidden value="">Choose one</option>
       <option v-for="country in countryList">{{ country }}</option>
     </select>
+    <button class="md-magic-button" @click="chooseCountry(); countryValidator()">Magic!</button>
 
     <article class="layout-info">
       <p class="md-info" v-for="info of infos">{{ info }}</p>
@@ -20,24 +22,26 @@
   import Axios from 'axios'
   export default {
     name: 'SelectCountry',
-    props: ['countryList'],
+    props: ['countryList', 'country', 'countryValidator'],
     data () {
       return {
         infos: [
           'Development Assignment for Rebtel',
           'Thank you for using this App'
-        ]
+        ],
+        _country: this.country
+      }
+    },
+    computed: {
+      country () {
+        return this.country
       }
     },
     created: function () {
       this.fetchCountriesNames()
     },
-    mounted: function () {
-      setInterval(() => {
-      }, 1000)
-    },
     methods: {
-      fetchCountriesNames: function () {
+      fetchCountriesNames () {
         Axios.get('https://restcountries.eu/rest/v2/all?fields=name')
             .then((res) => {
               const maxLength = 33
@@ -52,6 +56,9 @@
             }).catch((error) => {
               console.log(error)
             })
+      },
+      chooseCountry () {
+        this.$emit('chooseCountry', this._country)
       }
     }
   }
@@ -72,6 +79,44 @@
     z-index: 100;
   }
 
+  .md-magic-button {
+    background: none;
+    border: 2px solid $secondary-color;
+    width: 100%;
+    margin: 15px 0;
+    height: 35px;
+    text-transform: uppercase;
+    color: $secondary-color;
+    position: relative;
+    opacity: 0;
+    animation: introAnim .5s .6s forwards ease;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 100%;
+      background-color: $secondary-color;
+      transition: .5s ease;
+      z-index: -1;
+    }
+
+    &:hover {
+      color: $primary-color;
+      &:before {
+        width: 100%;
+        left: 0;
+      }
+    }
+
+    &:focus, &:active {
+      border: none;
+      background-color: darken($primary-color, 10%);
+    }
+  }
+
   .layout-info {
     margin-top: 150px;
     .md-info {
@@ -80,11 +125,11 @@
       font-size: 20px;
       opacity: 0;
       &:first-of-type {
-        animation: introAnim .5s .6s forwards ease;
+        animation: introAnim .5s .8s forwards ease;
       }
 
       &:last-of-type {
-        animation: introAnim .5s .8s forwards ease;
+        animation: introAnim .5s 1s forwards ease;
       }
     }
   }
@@ -94,8 +139,8 @@
     text-align: center;
     font-size: 14px;
     opacity: 0;
-    animation: introAnim .5s 1s forwards ease;
-    margin-top: 220px;
+    animation: introAnim .5s 1.2s forwards ease;
+    margin-top: 160px;
   }
 
   .md-subtitle {
