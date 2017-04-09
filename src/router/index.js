@@ -1,6 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
+
+// Importing Pages
+import Home from '@/components/pages/Home'
+
+// Importing Components
+import Header from '@/components/root/Header'
+import SelectCountry from '@/components/modules/SelectCountry'
+
+// Defining Components
+Vue.component('app-header', Header)
+Vue.component('app-select-country', SelectCountry)
 
 Vue.use(Router)
 
@@ -8,8 +18,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello
+      name: 'Home',
+      component: Home
     }
   ]
 })

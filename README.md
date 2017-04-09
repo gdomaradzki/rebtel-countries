@@ -1,6 +1,6 @@
 # rebtel-eu-countries
 
-> A Vue.js project
+> A simple app for getting to know a little more about any country
 
 ## Build Setup
 
@@ -10,6 +10,9 @@ npm install
 
 # serve with hot reload at localhost:8080
 npm run dev
+
+# if you have any errors regarding dependencies after running npm run dev
+npm install -only=dev
 
 # build for production with minification
 npm run build
@@ -26,5 +29,3 @@ npm run e2e
 # run all tests
 npm test
 ```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
