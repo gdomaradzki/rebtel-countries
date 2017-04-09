@@ -1,8 +1,7 @@
 <template>
   <div id="app">
     <div class="container">
-      <app-header></app-header>
-      <app-select-country></app-select-country>
+      <app-side-bar :countryList="countryList"></app-side-bar>
       <router-view></router-view>
     </div>
   </div>
@@ -10,7 +9,12 @@
 
 <script>
   export default {
-    name: 'app'
+    name: 'app',
+    data () {
+      return {
+        countryList: []
+      }
+    }
   }
 </script>
 

@@ -1,7 +1,7 @@
 {
-  "name": "rebtel-eu-countries",
+  "name": "rebtel-countries",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "A development assignment for Rebtel, in which I have to develop a simple app and consume an API about Countries",
   "author": "Gustavo Domaradzki <gutzedomaradzki@gmail.com>",
   "private": true,
   "scripts": {

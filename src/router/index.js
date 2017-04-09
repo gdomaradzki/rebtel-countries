@@ -5,12 +5,12 @@ import Router from 'vue-router'
 import Home from '@/components/pages/Home'
 
 // Importing Components
-import Header from '@/components/root/Header'
-import SelectCountry from '@/components/modules/SelectCountry'
+import SideBar from '@/components/modules/SideBar'
+import Logo from '@/components/root/Logo'
 
 // Defining Components
-Vue.component('app-header', Header)
-Vue.component('app-select-country', SelectCountry)
+Vue.component('app-side-bar', SideBar)
+Vue.component('app-logo', Logo)
 
 Vue.use(Router)
 
