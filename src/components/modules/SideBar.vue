@@ -24,7 +24,7 @@
 <script>
   export default {
     name: 'SelectCountry',
-    props: ['countryList', 'country', 'area', 'countrySelectHandler'],
+    props: ['countryList', 'countrySelectHandler'],
     data () {
       return {
         infos: [
