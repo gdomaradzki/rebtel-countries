@@ -29,9 +29,9 @@
     },
     created: function () {
       this.fetchCountriesNames()
-      setInterval(() => {
-        console.log(this.country)
-      }, 1000)
+      // setInterval(() => {
+      //   console.log(this.country)
+      // }, 1000)
     },
     methods: {
       showInfo (visible) {
@@ -45,8 +45,7 @@
         Axios.get('https://restcountries.eu/rest/v2/name/' + chosenCountry)
             .then((res) => {
               this.country = res.data
-              console.log(this.country)
-              this.countryParser()
+              this.countryParser(res.data)
             }).catch((error) => {
               console.log(error)
             })
@@ -59,12 +58,13 @@
           let value = countryObject[firstKey]
           this.country = value
         }
+        console.log(this.country)
       },
       fetchCountriesNames () {
         Axios.get('https://restcountries.eu/rest/v2/all?fields=name')
             .then((res) => {
               const maxLength = 29
-              this.countryList = res.data.map(country => this.truncateNames(country.name, maxLength))
+              this.countryList = res.data.map(({name}) => this.truncateNames(name, maxLength))
             }).catch((error) => {
               console.log(error)
             })
