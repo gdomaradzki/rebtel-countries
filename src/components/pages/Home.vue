@@ -2,26 +2,30 @@
   <main class="layout-home-page">
     <h1 class="md-title">Are you ready to be a <span class="md-rebtel">Rebel</span>?</h1>
     <h2 class="md-subtitle-info">Get to know more about your world!</h2>
-    <section class="layout-country-info">
-      <div class="col s12">
-        <h3 class="md-country-name">{{ country.name }}</h3>
-      </div>
-      <div class="col s12 m6">
-        <h4 class="md-country-name md-native-name">{{ country.nativeName }}</h4>
-        <img class="md-country-flag" :src="country.flag" :alt="country.name">
-      </div>
-      <div class="col s12 m6">
-        <h5 class="md-info-label">Capital</h5>
-        <p class="md-country-text">{{ country.capital }}</p>
-        <h5 class="md-info-label">Calling Codes</h5>
-        <p class="md-country-text" v-for="codes in country.callingCodes">{{ codes }}</p>
-        <h5 class="md-info-label">Region</h5>
-        <p class="md-country-text">{{ country.region }}</p>
-        <h5 class="md-info-label">Currencies</h5>
-        <div class="layout-country-currencies" v-for="currency in country.currencies">
-          <p class="md-country-text">Code: {{ currency.code }}</p>
-          <p class="md-country-text">Name: {{ currency.name }}</p>
-          <p class="md-country-text">Symbol: {{ currency.symbol }}</p>
+    <section class="layout-country-info" :class=" isVisible ? 'is-area-visible' : 'is-area-hidden' ">
+      <div class="row">
+        <div class="col s12">
+          <h3 class="md-country-name">{{ country.name }}</h3>
+        </div>
+        <div class="col s12 m5">
+          <h4 class="md-country-name md-native-name">{{ country.nativeName }}</h4>
+          <img class="md-country-flag" :src="country.flag" :alt="country.name">
+        </div>
+        <div class="col s12 m7">
+          <h5 class="md-info-label">Capital</h5>
+          <p class="md-country-text">{{ country.capital }}</p>
+          <h5 class="md-info-label">Calling Codes</h5>
+          <p class="md-country-text" v-for="codes in country.callingCodes">{{ codes }}</p>
+          <h5 class="md-info-label">Region</h5>
+          <p class="md-country-text">{{ country.region }}</p>
+          <h5 class="md-info-label">Currencies</h5>
+          <div class="layout-country-currencies" v-for="currency in country.currencies">
+          </div>
+          <ul class=" layout-country-currencies" v-for="currency in country.currencies">
+            <li class="md-country-text">Code: {{ currency.code }}</li>
+            <li class="md-country-text">Name: {{ currency.name }}</li>
+            <li class="md-country-text">Symbol: {{ currency.symbol }}</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -31,12 +35,7 @@
 <script>
   export default {
     name: 'Home',
-    props: ['country'],
-    mounted: function () {
-      setInterval(() => {
-        console.log(this.country)
-      }, 1000)
-    }
+    props: ['country', 'isVisible']
   }
 </script>
 
@@ -46,6 +45,10 @@
 
   body {
     background-color: $secondary-color;
+  }
+
+  .layout-home-page {
+    position: relative;
   }
 
   .md-title {
@@ -62,9 +65,13 @@
   }
 
   .layout-country-info {
-    margin-top: 60px;
-    padding: 30px 0;
+    margin-top: 30px;
+    padding: 25px 0 20px;
     border-top: 2px solid $primary-color;
+
+    .row {
+      margin-bottom: 0;
+    }
 
     .md-country-name {
       color: #1e1e1e;
@@ -77,7 +84,7 @@
     .md-country-text {
       font-size: 16px;
       color: #565656;
-      margin: 5px 0 30px;
+      margin: 5px 0;
     }
 
     .md-country-flag {
@@ -90,6 +97,20 @@
       display: flex;
       justify-content: space-between;
     }
+  }
+
+  .is-area-hidden {
+    transition: .3s ease;
+    opacity: 0;
+    transform: translateY(-60px);
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+  }
+  .is-area-visible {
+    transition: .5s ease;
+    opacity: 1;
+    transform: translateY(0);
   }
 
   @keyframes rebtelAnim {

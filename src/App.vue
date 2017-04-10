@@ -4,11 +4,12 @@
       <app-side-bar :countryList="countryList"
                     :country="country"
                     @chooseCountry="chosenCountry($event)"
-                    :countryValidator="countryValidator">
+                    :countryValidator="countryValidator"
+                    @toggleVisible="isVisible = true">
       </app-side-bar>
       <div class="row">
         <div class="col s12 m10">
-          <router-view :country="country"></router-view>
+          <router-view :country="country" :isVisible="isVisible"></router-view>
         </div>
       </div>
     </div>
@@ -22,10 +23,14 @@
     data () {
       return {
         countryList: [],
-        country: []
+        country: [],
+        isVisible: false
       }
     },
     methods: {
+      showInfo (visible) {
+        this.$set(this.area.isVisible, 'visible', visible)
+      },
       chosenCountry (country) {
         this.$set(this.country, 'country', country)
       },
@@ -51,11 +56,6 @@
         }
       }
     }
-    // mounted: function () {
-    //   setInterval(() => {
-    //     console.log(this.country)
-    //   }, 1000)
-    // }
   }
 </script>
 

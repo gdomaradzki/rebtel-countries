@@ -6,7 +6,7 @@
       <option hidden value="">Choose one</option>
       <option v-for="country in countryList">{{ country }}</option>
     </select>
-    <button class="md-magic-button" @click="chooseCountry(); countryValidator()">Magic!</button>
+    <button class="md-magic-button" @click="chooseCountry(); countryValidator(); $emit('toggleVisible')">Magic!</button>
 
     <article class="layout-info">
       <p class="md-info" v-for="info of infos">{{ info }}</p>
@@ -22,14 +22,15 @@
   import Axios from 'axios'
   export default {
     name: 'SelectCountry',
-    props: ['countryList', 'country', 'countryValidator'],
+    props: ['countryList', 'country', 'countryValidator', 'area'],
     data () {
       return {
         infos: [
           'Development Assignment for Rebtel',
           'Thank you for using this App'
         ],
-        _country: this.country
+        _country: this.country,
+        visible: false
       }
     },
     computed: {
