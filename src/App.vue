@@ -27,6 +27,12 @@
         isVisible: false
       }
     },
+    created: function () {
+      this.fetchCountriesNames()
+      setInterval(() => {
+        console.log(this.country)
+      }, 1000)
+    },
     methods: {
       showInfo (visible) {
         this.$set(this.area.isVisible, 'visible', visible)
@@ -35,25 +41,36 @@
         this.$set(this.country, 'country', country)
       },
       countryValidator () {
-        let chosenCountry = this.country.country
+        const chosenCountry = this.country.country
         Axios.get('https://restcountries.eu/rest/v2/name/' + chosenCountry)
             .then((res) => {
-              this.country = []
-              this.country.push(res.data)
+              this.country = res.data
+              console.log(this.country)
               this.countryParser()
             }).catch((error) => {
               console.log(error)
             })
       },
       countryParser () {
-        let country = this.country
-        for (let i = 0; i < country.length; i++) {
+        const country = this.country
+        for (let i in country) {
           let countryObject = country[i]
           let firstKey = Object.keys(countryObject)[0]
           let value = countryObject[firstKey]
-          this.country = []
           this.country = value
         }
+      },
+      fetchCountriesNames () {
+        Axios.get('https://restcountries.eu/rest/v2/all?fields=name')
+            .then((res) => {
+              const maxLength = 29
+              this.countryList = res.data.map(country => this.truncateNames(country.name, maxLength))
+            }).catch((error) => {
+              console.log(error)
+            })
+      },
+      truncateNames (name, maxLength) {
+        return name.length >= maxLength ? `${name.slice(0, maxLength)}...` : name
       }
     }
   }

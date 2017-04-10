@@ -22,7 +22,6 @@
 </template>
 
 <script>
-  import Axios from 'axios'
   export default {
     name: 'SelectCountry',
     props: ['countryList', 'country', 'countryValidator', 'area'],
@@ -41,26 +40,7 @@
         return this.country
       }
     },
-    created: function () {
-      this.fetchCountriesNames()
-    },
     methods: {
-      fetchCountriesNames () {
-        Axios.get('https://restcountries.eu/rest/v2/all?fields=name')
-            .then((res) => {
-              const maxLength = 33
-              for (let i in res.data) {
-                if (res.data[i].name.length >= maxLength) {
-                  res.data[i].name.concat('...')
-                  this.countryList.push(res.data[i].name.substr(0, maxLength).concat('...'))
-                } else {
-                  this.countryList.push(res.data[i].name.substr(0, maxLength))
-                }
-              }
-            }).catch((error) => {
-              console.log(error)
-            })
-      },
       chooseCountry () {
         this.$emit('chooseCountry', this._country)
       }
