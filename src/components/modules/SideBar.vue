@@ -8,7 +8,7 @@
         <option hidden value="">Choose one</option>
         <option v-for="country in countryList">{{ country }}</option>
       </select>
-      <button class="md-magic-button" @click="chooseCountry(); $emit('toggleVisible')">Magic!</button>
+      <button class="md-magic-button" @click="$emit('toggleVisible'); countrySelectHandler(_country)">Magic!</button>
 
       <article class="layout-info">
         <p class="md-info" v-for="info of infos">{{ info }}</p>
@@ -24,7 +24,7 @@
 <script>
   export default {
     name: 'SelectCountry',
-    props: ['countryList', 'country', 'area'],
+    props: ['countryList', 'country', 'area', 'countrySelectHandler'],
     data () {
       return {
         infos: [
@@ -33,16 +33,6 @@
         ],
         _country: this.country,
         isVisible: false
-      }
-    },
-    computed: {
-      country () {
-        return this.country
-      }
-    },
-    methods: {
-      chooseCountry () {
-        this.$emit('chooseCountry', this._country)
       }
     }
   }

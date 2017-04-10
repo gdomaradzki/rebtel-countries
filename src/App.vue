@@ -3,7 +3,7 @@
     <div class="container">
       <app-side-bar :countryList="countryList"
                     :country="country"
-                    :selectHandler="selectHandler"
+                    :countrySelectHandler="countrySelectHandler"
                     @toggleVisible="isVisible = true">
       </app-side-bar>
       <div class="row">
@@ -30,17 +30,11 @@
     },
     created: function () {
       this.fetchCountriesNames()
-      setInterval(() => {
-        console.log(this.country)
-      }, 1000)
+      // setInterval(() => {
+      //   console.log(this.country)
+      // }, 1000)
     },
     methods: {
-      showInfo (visible) {
-        this.$set(this.area.isVisible, 'visible', visible)
-      },
-      chosenCountry (country) {
-        this.$set(this.country, 'country', country)
-      },
       fetchCountriesNames () {
         Axios.get('https://restcountries.eu/rest/v2/all?fields=name')
             .then((res) => {
@@ -54,7 +48,7 @@
         name.length >= maxLength ? `${name.slice(0, maxLength)}...` : name,
       fetchCountry () {
       },
-      selectHandler () {
+      countrySelectHandler () {
         console.log
       }
     }
