@@ -7,11 +7,11 @@
         <div class="col s12">
           <h3 class="md-country-name">{{ country.name }}</h3>
         </div>
-        <div class="col s12 m5">
+        <div class="col s12 m8 l5">
           <h4 class="md-country-name md-native-name">{{ country.nativeName }}</h4>
           <img class="md-country-flag" :src="country.flag" :alt="country.name">
         </div>
-        <div class="col s12 m7">
+        <div class="col s12 m4 l7">
           <h5 class="md-info-label">Capital</h5>
           <p class="md-country-text">{{ country.capital }}</p>
           <h5 class="md-info-label">Calling Codes</h5>
@@ -49,17 +49,45 @@
 
   .layout-home-page {
     position: relative;
+
+    @media (max-width: 800px) {
+      margin-top: 180px;
+    }
   }
 
   .md-title {
     color: $primary-color;
-    line-height: 2;
+    line-height: 1;
+    font-size: 50px;
+    margin-top: 15px;
+
+    @media (max-width: 1024px) {
+      line-height: 1.5;
+      font-size: 40px;
+    }
+
+    @media (max-width: 800px) {
+      text-align: center;
+    }
+  }
+
+  .md-subtitle-info {
+    font-size: 42px;
+    color: #1e1e1e;
+
+    @media (max-width: 1024px) {
+      font-size: 32px;
+    }
+
+    @media (max-width: 800px) {
+      text-align: center;
+    }
   }
 
   .md-rebtel {
     background-color: $primary-color;
     color: $secondary-color;
-    padding: 0 15px;
+    padding: 5px 15px;
     display: inline-block;
     animation: rebtelAnim 1s 3s forwards ease;
   }
@@ -67,7 +95,6 @@
   .layout-country-info {
     margin-top: 30px;
     padding: 25px 0 20px;
-    border-top: 2px solid $primary-color;
 
     .row {
       margin-bottom: 0;
@@ -88,7 +115,7 @@
     }
 
     .md-country-flag {
-      width: 290px;
+      width: 100%;
       display: block;
       margin: 30px 0;
     }
@@ -96,6 +123,15 @@
     .layout-country-currencies {
       display: flex;
       justify-content: space-between;
+      margin-top: 0;
+
+      @media (max-width: 1200px) {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 600px) {
+      text-align: center;
     }
   }
 

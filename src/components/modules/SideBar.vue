@@ -1,21 +1,24 @@
 <template>
-  <aside class="layout-app-sidebar">
-    <app-logo></app-logo>
-    <h3 class="md-subtitle">select a country</h3>
-    <select ref="selectCountry" name="select-country" required class="md-select-country" v-model="_country">
-      <option hidden value="">Choose one</option>
-      <option v-for="country in countryList">{{ country }}</option>
-    </select>
-    <button class="md-magic-button" @click="chooseCountry(); countryValidator(); $emit('toggleVisible')">Magic!</button>
+  <div class="app-side-bar" :class=" isVisible ? 'app-side-bar-active' : 'app-side-bar-inactive' ">
+    <app-logo @toggleVisible=" isVisible = !isVisible "></app-logo>
+    <p class="md-side-bar-start-reminder">click me to start</p>
+    <aside class="layout-app-sidebar" :class=" isVisible ? 'is-area-visible' : 'is-area-hidden' ">
+      <h3 class="md-subtitle">select a country</h3>
+      <select ref="selectCountry" name="select-country" required class="md-select-country" v-model="_country">
+        <option hidden value="">Choose one</option>
+        <option v-for="country in countryList">{{ country }}</option>
+      </select>
+      <button class="md-magic-button" @click="chooseCountry(); countryValidator(); $emit('toggleVisible')">Magic!</button>
 
-    <article class="layout-info">
-      <p class="md-info" v-for="info of infos">{{ info }}</p>
-    </article>
+      <article class="layout-info">
+        <p class="md-info" v-for="info of infos">{{ info }}</p>
+      </article>
 
-    <article class="layout-copyright">
-      <p class="md-copyright">Made with &#10084; by Gustavo Domaradzki</p>
-    </article>
-  </aside>
+      <article class="layout-copyright">
+        <p class="md-copyright">Made with &#10084; by Gustavo Domaradzki</p>
+      </article>
+    </aside>
+  </div>
 </template>
 
 <script>
@@ -30,7 +33,7 @@
           'Thank you for using this App'
         ],
         _country: this.country,
-        visible: false
+        isVisible: false
       }
     },
     computed: {
@@ -69,15 +72,41 @@
   $primary-color: #e3232e;
   $secondary-color: #f1f1f1;
 
-  .layout-app-sidebar {
-    background-color: $primary-color;
+  .app-side-bar {
     width: 320px;
     height: 100%;
     position: fixed;
     right: 0;
     top: 0;
     padding: 0 15px;
+    height: 100%;
+
+    @media (max-width: 600px) {
+      overflow-y: scroll;
+    }
+  }
+
+  .app-side-bar-active {
+    transition: background-color .3s ease;
+    background-color: $primary-color;
     z-index: 100;
+  }
+
+  .app-side-bar-inactive {
+    transition: background-color .8s ease;
+    background-color: transparent;
+  }
+
+  .layout-app-sidebar {
+    background-color: $primary-color;
+    padding: 0 15px;
+    height: 100%;
+  }
+
+  .md-side-bar-start-reminder {
+    text-transform: uppercase;
+    text-align: center;
+    color: $primary-color;
   }
 
   .md-magic-button {
@@ -133,6 +162,10 @@
         animation: introAnim .5s 1s forwards ease;
       }
     }
+
+    @media (max-width: 1024px) {
+      margin-top: 50px;
+    }
   }
 
   .md-copyright {
@@ -149,9 +182,10 @@
     text-transform: uppercase;
     font-size: 22px;
     text-align: center;
-    margin: 30px 0;
     opacity: 0;
     animation: introAnim .5s .2s forwards ease;
+    margin: 0 0 30px;
+    padding-top: 40px;
   }
 
   .md-select-country {

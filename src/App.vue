@@ -8,7 +8,7 @@
                     @toggleVisible="isVisible = true">
       </app-side-bar>
       <div class="row">
-        <div class="col s12 m10">
+        <div class="col s12 m12 l10">
           <router-view :country="country" :isVisible="isVisible"></router-view>
         </div>
       </div>
@@ -60,4 +60,11 @@
 </script>
 
 <style lang="scss">
+  .container {
+    position: relative;
+  }
+
+  * {
+    // border: 1px solid blue;
+  }
 </style>
