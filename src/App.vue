@@ -69,9 +69,11 @@
               console.log(error)
             })
       },
-      truncateNames (name, maxLength) {
-        return name.length >= maxLength ? `${name.slice(0, maxLength)}...` : name
-      }
+      truncateNames: (name, maxLength) =>
+        name.length >= maxLength ? `${name.slice(0, maxLength)}...` : name
+      // truncateNames (name, maxLength) {
+      //   return name.length >= maxLength ? `${name.slice(0, maxLength)}...` : name
+      // }
     }
   }
 </script>
