@@ -4,7 +4,6 @@
       <app-side-bar :countryList="countryList"
                     :country="country"
                     @chooseCountry="chosenCountry($event)"
-                    :countryValidator="countryValidator"
                     @toggleVisible="isVisible = true">
       </app-side-bar>
       <div class="row">
@@ -17,6 +16,7 @@
 </template>
 
 <script>
+// :countryValidator="countryValidator"
   import Axios from 'axios'
   export default {
     name: 'app',
@@ -29,9 +29,9 @@
     },
     created: function () {
       this.fetchCountriesNames()
-      // setInterval(() => {
-      //   console.log(this.country)
-      // }, 1000)
+      setInterval(() => {
+        console.log(this.country)
+      }, 1000)
     },
     methods: {
       showInfo (visible) {
@@ -40,26 +40,26 @@
       chosenCountry (country) {
         this.$set(this.country, 'country', country)
       },
-      countryValidator () {
-        const chosenCountry = this.country.country
-        Axios.get('https://restcountries.eu/rest/v2/name/' + chosenCountry)
-            .then((res) => {
-              this.country = res.data
-              this.countryParser(res.data)
-            }).catch((error) => {
-              console.log(error)
-            })
-      },
-      countryParser () {
-        const country = this.country
-        for (let i in country) {
-          let countryObject = country[i]
-          let firstKey = Object.keys(countryObject)[0]
-          let value = countryObject[firstKey]
-          this.country = value
-        }
-        console.log(this.country)
-      },
+      // countryValidator () {
+      //   const chosenCountry = this.country.country
+      //   Axios.get('https://restcountries.eu/rest/v2/name/' + chosenCountry)
+      //       .then((res) => {
+      //         this.country = res.data
+      //         this.countryParser(res.data)
+      //       }).catch((error) => {
+      //         console.log(error)
+      //       })
+      // },
+      // countryParser () {
+      //   const country = this.country
+      //   for (let i in country) {
+      //     let countryObject = country[i]
+      //     let firstKey = Object.keys(countryObject)[0]
+      //     let value = countryObject[firstKey]
+      //     this.country = value
+      //   }
+      //   console.log(this.country)
+      // },
       fetchCountriesNames () {
         Axios.get('https://restcountries.eu/rest/v2/all?fields=name')
             .then((res) => {
@@ -71,9 +71,6 @@
       },
       truncateNames: (name, maxLength) =>
         name.length >= maxLength ? `${name.slice(0, maxLength)}...` : name
-      // truncateNames (name, maxLength) {
-      //   return name.length >= maxLength ? `${name.slice(0, maxLength)}...` : name
-      // }
     }
   }
 </script>
