@@ -16,8 +16,6 @@
 </template>
 
 <script>
-// :countryValidator="countryValidator"
-// @chooseCountry="chosenCountry($event)""
   import Axios from 'axios'
   export default {
     name: 'app',
@@ -30,9 +28,6 @@
     },
     created: function () {
       this.fetchCountriesNames()
-      // setInterval(() => {
-      //   console.log(this.country)
-      // }, 1000)
     },
     methods: {
       fetchCountriesNames () {
@@ -48,8 +43,8 @@
         name.length >= maxLength ? `${name.slice(0, maxLength)}...` : name,
       fetchCountry () {
       },
-      countrySelectHandler () {
-        console.log
+      countrySelectHandler (name) {
+        console.log(name)
       }
     }
   }

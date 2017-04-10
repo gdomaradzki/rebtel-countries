@@ -4,11 +4,11 @@
     <p class="md-side-bar-start-reminder">click me to start</p>
     <aside class="layout-app-sidebar" :class=" isVisible ? 'is-area-visible' : 'is-area-hidden' ">
       <h3 class="md-subtitle">select a country</h3>
-      <select ref="selectCountry" name="select-country" required class="md-select-country" v-model="_country">
+      <select name="select-country" required class="md-select-country" v-model="selectedCountry">
         <option hidden value="">Choose one</option>
         <option v-for="country in countryList">{{ country }}</option>
       </select>
-      <button class="md-magic-button" @click="$emit('toggleVisible'); countrySelectHandler(_country)">Magic!</button>
+      <button class="md-magic-button" @click="buttonClickHandler()">Magic!</button>
 
       <article class="layout-info">
         <p class="md-info" v-for="info of infos">{{ info }}</p>
@@ -31,8 +31,14 @@
           'Development Assignment for Rebtel',
           'Thank you for using this App'
         ],
-        _country: this.country,
+        selectedCountry: '',
         isVisible: false
+      }
+    },
+    methods: {
+      buttonClickHandler () {
+        this.$emit('toggleVisible')
+        this.countrySelectHandler(this.selectedCountry)
       }
     }
   }

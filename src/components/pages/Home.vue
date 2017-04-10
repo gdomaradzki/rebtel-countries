@@ -36,11 +36,6 @@
   export default {
     name: 'Home',
     props: ['country', 'isVisible']
-    // mounted: function () {
-    //   setInterval(() => {
-    //     console.log(this.country)
-    //   }, 1000)
-    // }
   }
 </script>
 
