@@ -3,7 +3,7 @@
     <div class="container">
       <app-side-bar :countryList="countryList"
                     :country="country"
-                    @chooseCountry="chosenCountry($event)"
+                    :selectHandler="selectHandler"
                     @toggleVisible="isVisible = true">
       </app-side-bar>
       <div class="row">
@@ -17,6 +17,7 @@
 
 <script>
 // :countryValidator="countryValidator"
+// @chooseCountry="chosenCountry($event)""
   import Axios from 'axios'
   export default {
     name: 'app',
@@ -40,26 +41,6 @@
       chosenCountry (country) {
         this.$set(this.country, 'country', country)
       },
-      // countryValidator () {
-      //   const chosenCountry = this.country.country
-      //   Axios.get('https://restcountries.eu/rest/v2/name/' + chosenCountry)
-      //       .then((res) => {
-      //         this.country = res.data
-      //         this.countryParser(res.data)
-      //       }).catch((error) => {
-      //         console.log(error)
-      //       })
-      // },
-      // countryParser () {
-      //   const country = this.country
-      //   for (let i in country) {
-      //     let countryObject = country[i]
-      //     let firstKey = Object.keys(countryObject)[0]
-      //     let value = countryObject[firstKey]
-      //     this.country = value
-      //   }
-      //   console.log(this.country)
-      // },
       fetchCountriesNames () {
         Axios.get('https://restcountries.eu/rest/v2/all?fields=name')
             .then((res) => {
@@ -70,7 +51,12 @@
             })
       },
       truncateNames: (name, maxLength) =>
-        name.length >= maxLength ? `${name.slice(0, maxLength)}...` : name
+        name.length >= maxLength ? `${name.slice(0, maxLength)}...` : name,
+      fetchCountry () {
+      },
+      selectHandler () {
+        console.log
+      }
     }
   }
 </script>
@@ -78,9 +64,5 @@
 <style lang="scss">
   .container {
     position: relative;
-  }
-
-  * {
-    // border: 1px solid blue;
   }
 </style>
