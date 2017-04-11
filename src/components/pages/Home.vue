@@ -2,7 +2,7 @@
   <main class="layout-home-page">
     <h1 class="md-title">Are you ready to be a <span class="md-rebtel">Rebel</span>?</h1>
     <h2 class="md-subtitle-info">Get to know more about your world!</h2>
-    <section class="layout-country-info" :class=" isVisible ? 'is-area-visible' : 'is-area-hidden' ">
+    <section class="layout-country-info" :class="isVisible ? 'is-area-visible' : 'is-area-hidden'">
       <div class="row">
         <div class="col s12">
           <h3 class="md-country-name">{{ country.name }}</h3>

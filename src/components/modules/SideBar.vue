@@ -1,8 +1,12 @@
 <template>
-  <div class="app-side-bar" :class=" isVisible ? 'app-side-bar-active' : 'app-side-bar-inactive' ">
-    <app-logo @toggleVisible=" isVisible = !isVisible " @wasStarted=" wasClicked = true "></app-logo>
-    <p class="md-side-bar-start-reminder" :class=" wasClicked ? 'app-reminder-inactive' : 'app-reminder-active' ">click me to start</p>
-    <aside class="layout-app-sidebar" :class=" isVisible ? 'is-area-visible' : 'is-area-hidden' ">
+  <div class="app-side-bar" :class="isVisible ? 'app-side-bar-active' : 'app-side-bar-inactive'">
+    <app-logo @toggleVisible="isVisible = !isVisible"
+              @wasStarted="wasClicked = true">
+    </app-logo>
+    <p class="md-side-bar-start-reminder" :class="wasClicked ? 'app-reminder-inactive' : 'app-reminder-active'">
+      click me to start
+    </p>
+    <aside class="layout-app-sidebar" :class="isVisible ? 'is-area-visible' : 'is-area-hidden'">
       <h3 class="md-subtitle">select a country</h3>
       <select name="select-country" required class="md-select-country" v-model="selectedCountry">
         <option hidden value="">Choose one</option>
@@ -105,6 +109,7 @@
     text-transform: uppercase;
     text-align: center;
     color: $primary-color;
+    cursor: pointer;
   }
 
   .md-magic-button {
