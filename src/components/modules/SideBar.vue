@@ -64,7 +64,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   $primary-color: #e3232e;
   $secondary-color: #f1f1f1;
 
@@ -79,7 +79,7 @@
     z-index: 150;
 
     @media (max-width: 600px) {
-      overflow-y: scroll;
+      // overflow-y: scroll;
       width: 100%;
     }
   }
@@ -199,6 +199,10 @@
   }
 
   .app-reminder-inactive {
+    display: none;
+  }
+
+  .is-area-hidden {
     display: none;
   }
 

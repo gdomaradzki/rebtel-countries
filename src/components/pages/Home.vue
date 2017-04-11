@@ -142,7 +142,6 @@
     position: absolute;
     z-index: -1;
     width: 100%;
-    display: none;
   }
 
   .is-area-visible {
