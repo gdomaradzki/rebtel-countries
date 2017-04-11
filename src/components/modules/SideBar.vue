@@ -3,9 +3,6 @@
     <app-logo @toggleVisible="isVisible = !isVisible"
               @wasStarted="wasClicked = true">
     </app-logo>
-    <p class="md-side-bar-start-reminder" :class="wasClicked ? 'app-reminder-inactive' : 'app-reminder-active'">
-      click me to start
-    </p>
     <aside class="layout-app-sidebar" :class="isVisible ? 'is-area-visible' : 'is-area-hidden'">
       <h3 class="md-subtitle">select a country</h3>
       <select name="select-country" required class="md-select-country" v-model="selectedCountry">
@@ -52,7 +49,6 @@
     methods: {
       buttonClickHandler () {
         this.$emit('toggleVisible')
-        this.$emit('wasStarted')
         this.countrySelectHandler(this.selectedCountry)
       },
       // Closes the SideBar in case resolution is 800px or less
@@ -83,7 +79,6 @@
     z-index: 150;
 
     @media (max-width: 600px) {
-      // overflow-y: scroll;
       width: 100%;
     }
   }
@@ -103,13 +98,6 @@
     background-color: $primary-color;
     padding: 0 15px;
     height: 100%;
-  }
-
-  .md-side-bar-start-reminder {
-    text-transform: uppercase;
-    text-align: center;
-    color: $primary-color;
-    cursor: pointer;
   }
 
   .md-magic-button {
@@ -197,14 +185,6 @@
     width: 100%;
     opacity: 0;
     animation: introAnim .5s .4s forwards ease;
-  }
-
-  .app-reminder-active {
-    display: block;
-  }
-
-  .app-reminder-inactive {
-    display: none;
   }
 
   .is-area-hidden {
