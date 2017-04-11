@@ -71,6 +71,7 @@
 
     @media (max-width: 600px) {
       overflow-y: scroll;
+      width: 100%;
     }
   }
 
@@ -179,9 +180,13 @@
   .md-select-country {
     display: block;
     background-color: $secondary-color;
-    max-width: 290px;
+    width: 290px;
     opacity: 0;
     animation: introAnim .5s .4s forwards ease;
+
+    @media (max-width: 600px) {
+      width: 100%;
+    }
   }
 
   .app-reminder-active {

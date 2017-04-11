@@ -105,7 +105,7 @@
     }
 
     .md-native-name {
-      font-size: 20px;
+      font-size: 24px;
     }
 
     .md-country-text {
@@ -144,7 +144,7 @@
     width: 100%;
     display: none;
   }
-  
+
   .is-area-visible {
     transition: .5s ease;
     opacity: 1;
