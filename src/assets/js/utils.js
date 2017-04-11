@@ -1,4 +1,4 @@
-const truncateNames = (name, maxLength) =>
+const truncateName = (name, maxLength) =>
   name.length >= maxLength ? `${name.slice(0, maxLength)}...` : name
 
-export { truncateNames }
+export { truncateName }

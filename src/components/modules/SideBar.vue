@@ -1,12 +1,12 @@
 <template>
   <div class="app-side-bar" :class=" isVisible ? 'app-side-bar-active' : 'app-side-bar-inactive' ">
-    <app-logo @toggleVisible=" isVisible = !isVisible "></app-logo>
-    <p class="md-side-bar-start-reminder">click me to start</p>
+    <app-logo @toggleVisible=" isVisible = !isVisible " @wasStarted=" wasClicked = true "></app-logo>
+    <p class="md-side-bar-start-reminder" :class=" wasClicked ? 'app-reminder-inactive' : 'app-reminder-active' ">click me to start</p>
     <aside class="layout-app-sidebar" :class=" isVisible ? 'is-area-visible' : 'is-area-hidden' ">
       <h3 class="md-subtitle">select a country</h3>
       <select name="select-country" required class="md-select-country" v-model="selectedCountry">
         <option hidden value="">Choose one</option>
-        <option v-for="country in countryList">{{ country }}</option>
+        <option v-for="country in countryOptions":value="country.name">{{ country.label }}</option>
       </select>
       <button class="md-magic-button" @click="buttonClickHandler()">Magic!</button>
 
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  import { truncateNames } from '../../assets/js/utils.js'
+  import { truncateName } from '../../assets/js/utils.js'
   export default {
     name: 'SelectCountry',
     props: ['countryList', 'countrySelectHandler'],
@@ -33,20 +33,22 @@
           'Thank you for using this App'
         ],
         selectedCountry: '',
-        isVisible: false
+        isVisible: false,
+        wasClicked: false
       }
     },
     computed: {
-      truncatedCountryNames () {
-        return this.countryNames.map(name => truncateNames(name, 29))
+      countryOptions () {
+        return this.countryList.map(name => ({
+          label: truncateName(name, 29),
+          name
+        }))
       }
-    },
-    mounted: function () {
-      this.truncateNames(this.countryList, 29)
     },
     methods: {
       buttonClickHandler () {
         this.$emit('toggleVisible')
+        this.$emit('wasStarted')
         this.countrySelectHandler(this.selectedCountry)
       }
     }
@@ -65,6 +67,7 @@
     top: 0;
     padding: 0 15px;
     height: 100%;
+    z-index: 150;
 
     @media (max-width: 600px) {
       overflow-y: scroll;
@@ -179,6 +182,14 @@
     max-width: 290px;
     opacity: 0;
     animation: introAnim .5s .4s forwards ease;
+  }
+
+  .app-reminder-active {
+    display: block;
+  }
+
+  .app-reminder-inactive {
+    display: none;
   }
 
   @keyframes introAnim {

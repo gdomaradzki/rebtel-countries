@@ -3,7 +3,8 @@
     <div class="container">
       <app-side-bar :countryList="countryList"
                     :countrySelectHandler="countrySelectHandler"
-                    @toggleVisible="isVisible = true">
+                    @toggleVisible="isVisible = true"
+                    @wasStarted="wasClicked = true">
       </app-side-bar>
       <div class="row">
         <div class="col s12 m12 l10">
@@ -22,7 +23,8 @@
       return {
         countryList: [],
         country: [],
-        isVisible: false
+        isVisible: false,
+        wasClicked: true
       }
     },
     created: function () {
