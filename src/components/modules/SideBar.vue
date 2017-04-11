@@ -8,7 +8,7 @@
         <option hidden value="">Choose one</option>
         <option v-for="country in countryOptions":value="country.name">{{ country.label }}</option>
       </select>
-      <button class="md-magic-button" @click="buttonClickHandler()">Magic!</button>
+      <button class="md-magic-button" @click="buttonClickHandler(); mobileButtonClickHandler()">Magic!</button>
 
       <article class="layout-info">
         <p class="md-info" v-for="info of infos">{{ info }}</p>
@@ -50,6 +50,15 @@
         this.$emit('toggleVisible')
         this.$emit('wasStarted')
         this.countrySelectHandler(this.selectedCountry)
+      },
+      // Closes the SideBar in case resolution is 800px or less
+      mobileButtonClickHandler () {
+        let width = document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth
+        const targetWidth = 800
+
+        if (width <= targetWidth) {
+          this.isVisible = !this.isVisible
+        }
       }
     }
   }
