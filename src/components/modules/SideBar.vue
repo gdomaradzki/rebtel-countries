@@ -180,13 +180,9 @@
   .md-select-country {
     display: block;
     background-color: $secondary-color;
-    width: 290px;
+    width: 100%;
     opacity: 0;
     animation: introAnim .5s .4s forwards ease;
-
-    @media (max-width: 600px) {
-      width: 100%;
-    }
   }
 
   .app-reminder-active {
