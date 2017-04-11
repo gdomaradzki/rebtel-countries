@@ -2,7 +2,6 @@
   <div id="app">
     <div class="container">
       <app-side-bar :countryList="countryList"
-                    :country="country"
                     :countrySelectHandler="countrySelectHandler"
                     @toggleVisible="isVisible = true">
       </app-side-bar>
@@ -33,18 +32,23 @@
       fetchCountriesNames () {
         Axios.get('https://restcountries.eu/rest/v2/all?fields=name')
             .then((res) => {
-              const maxLength = 29
-              this.countryList = res.data.map(({name}) => this.truncateNames(name, maxLength))
+              this.countryList = res.data.map(country => country.name)
             }).catch((error) => {
               console.log(error)
             })
       },
-      truncateNames: (name, maxLength) =>
-        name.length >= maxLength ? `${name.slice(0, maxLength)}...` : name,
-      fetchCountry () {
+      fetchCountry (name) {
+        Axios.get(`https://restcountries.eu/rest/v2/name/${name}`)
+            .then(({data}) => {
+              this.country = data.length ? data[0] : null
+            }).catch((error) => {
+              console.log(error)
+            })
       },
+      /* Callbacak that is passed into the SideBar,
+        It gets called when the user selects a country */
       countrySelectHandler (name) {
-        console.log(name)
+        this.fetchCountry(name)
       }
     }
   }

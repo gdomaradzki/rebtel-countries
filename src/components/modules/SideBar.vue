@@ -22,6 +22,7 @@
 </template>
 
 <script>
+  import { truncateNames } from '../../assets/js/utils.js'
   export default {
     name: 'SelectCountry',
     props: ['countryList', 'countrySelectHandler'],
@@ -34,6 +35,14 @@
         selectedCountry: '',
         isVisible: false
       }
+    },
+    computed: {
+      truncatedCountryNames () {
+        return this.countryNames.map(name => truncateNames(name, 29))
+      }
+    },
+    mounted: function () {
+      this.truncateNames(this.countryList, 29)
     },
     methods: {
       buttonClickHandler () {
@@ -168,7 +177,6 @@
     display: block;
     background-color: $secondary-color;
     max-width: 290px;
-
     opacity: 0;
     animation: introAnim .5s .4s forwards ease;
   }
